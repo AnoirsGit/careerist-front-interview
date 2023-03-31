@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Node.js, PostgreSQL, and Express API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple Node.js and Express API project that uses PostgreSQL as a database. The API allows you to create and retrieve messages from the database.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
 
-### `npm start`
+1. Install dependencies:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   `cd your-repo
+   npm install`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Create a `.env` file and add your PostgreSQL connection URI from .env.example:
 
-### `npm test`
+3. Run the server:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   `npm run start` or `npm run dev` 
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The API has two endpoints:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `POST api/message`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a new message. The request body should contain the following fields:
 
-### `npm run eject`
+- `name` (string): The name of the message sender.
+- `text` (string): The text of the message.
+- `date` (string): The date the message was sent (in the format "YYYY-MM-DD").
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+If any of the fields are empty or the name contains characters other than Latin letters, numbers, '_', and '-', the API will return a 400 Bad Request error.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If the message is successfully created, the API will return a JSON object containing the message data.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `GET api/messages`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Retrieve all messages from the database. The API will return a JSON array of message objects.
 
-## Learn More
+## Controller
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project uses a MessagesController class to handle the API endpoints. The class includes two methods:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `createMessage`: Creates a new message in the database.
+- `getMessages`: Retrieves all messages from the database.
 
-### Code Splitting
+The `createMessage` method validates the request body using helper functions in `messages.validator.js`. If the validation passes, the method creates a new message in the database using the `db` object from `db.js`. The method returns the created message as a JSON object.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The `getMessages` method retrieves all messages from the database using the `db` object from `db.js`. The method returns the messages as a JSON array.
 
-### Analyzing the Bundle Size
+## Conclusion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is a basic Node.js and PostgreSQL API that demonstrates how to create and retrieve data from a PostgreSQL database using Express. Feel free to modify and extend it as needed.
