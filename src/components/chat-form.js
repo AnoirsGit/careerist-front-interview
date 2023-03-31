@@ -28,7 +28,7 @@ const ChatForm = ({addMewMessage}) => {
 
     if (isValidName && isValidText) {
       axios
-        .post("http://localhost:8080/api/message", {
+        .post(`${process.env.REACT_APP_API_URI}/api/message`, {
           name,
           text,
           date: new Date().toString(),

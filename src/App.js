@@ -12,7 +12,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/messages');
+        const response = await axios.get(`${process.env.REACT_APP_API_URI}/api/messages`);
         console.log(response);
         setMessages(response.data.sort((a, b) => new Date(b.date) - new Date(a.date)).map( message => ({...message, date: formatDate(message.date)})));
       } catch (err) {
