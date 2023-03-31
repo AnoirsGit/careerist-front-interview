@@ -23,16 +23,19 @@ const Chat = () => {
     fetchMessages();
   }, []);
 
-  const addMessage = (meesage) => setMessages([meesage, ...messages]);
+  const addMessage = (message) => {
+    message.date = formatDate(message.date);
+    setMessages([message, ...messages]);
+  }
 
   return (
     <>
-      <div className="flex flex-col mx-12 my-32">
+      <div className="flex flex-col mx-6 my-20 lg:mx-12 lg:my-32">
         {messages.map(({ name, text, date }) => (
           <Message key={name} name={name} text={text} date={date} />
         ))}
       </div>
-      <div className="fixed bottom-0 w-full border border-slate-400 h-max px-8 py-2">
+      <div className="fixed bottom-0 w-full border border-slate-400 h-max px-4 lg:px-8 py-2">
         <ChatForm addMewMessage={addMessage} />
       </div>
     </>
