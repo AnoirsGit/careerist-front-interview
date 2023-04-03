@@ -35,7 +35,10 @@ const ChatForm = ({addMewMessage}) => {
         })
         .catch((err) => {
           console.error(err);
-        }).then(res => addMewMessage(res.data));
+        }).then(res => {
+          addMewMessage(res.data);
+          setText('');
+      });
     } else {
     }
   };
