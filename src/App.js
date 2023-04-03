@@ -35,7 +35,7 @@ const Chat = () => {
           <Message key={name} name={name} text={text} date={date} />
         ))}
       </div>
-      <div className="fixed bottom-0 w-full border border-slate-400 h-max px-4 lg:px-8 py-2">
+      <div className="fixed bg-white bottom-0 w-full border border-slate-400 h-max px-4 lg:px-8 py-2">
         <ChatForm addMewMessage={addMessage} />
       </div>
     </>
