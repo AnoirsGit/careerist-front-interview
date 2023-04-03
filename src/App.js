@@ -30,7 +30,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className="flex flex-col mx-6 my-20 lg:mx-12 lg:my-32">
+      <div className="flex bg-white flex-col mx-6 my-20 lg:mx-12 lg:my-32">
         {messages.map(({ name, text, date }) => (
           <Message key={name} name={name} text={text} date={date} />
         ))}
